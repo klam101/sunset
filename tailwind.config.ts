@@ -69,20 +69,8 @@ const config = {
           900: "#101828",
         },
       },
-      fontSize: {
-        10: ["10px", { lineHeight: "14px" }],
-        12: ["12px", { lineHeight: "16px" }],
-        14: ["14px", { lineHeight: "20px" }],
-        16: ["16px", { lineHeight: "24px" }],
-        18: ["18px", { lineHeight: "22px" }],
-        20: ["20px", { lineHeight: "24px" }],
-        24: ["24px", { lineHeight: "30px" }],
-        26: ["26px", { lineHeight: "32px" }],
-        30: ["30px", { lineHeight: "38px" }],
-        36: ["36px", { lineHeight: "44px" }],
-      },
       backgroundImage: {
-        "bank-gradient": "linear-gradient(90deg, #0179FE 0%, #4893FF 100%)",
+        "bank-gradient": "linear-gradient(90deg, #FD7E05 0%, #FF9E42 100%)",
         "gradient-mesh": "url('/icons/gradient-mesh.svg')",
         "bank-green-gradient":
           "linear-gradient(90deg, #01797A 0%, #489399 100%)",
@@ -98,6 +86,8 @@ const config = {
       fontFamily: {
         inter: "var(--font-inter)",
         "ibm-plex-serif": "var(--font-ibm-plex-serif)",
+        vt323: "var(--font-vt323)",
+        mc: "var(--font-mc)",
       },
       keyframes: {
         "accordion-down": {

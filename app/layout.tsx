@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif, VT323 } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,6 +20,12 @@ const vt323 = VT323({
   weight: ["400"],
 })
 
+const mcfont = localFont({
+  src: "../public/fonts/Monocraft.ttf",
+  variable: "--font-mc",
+  weight: "400"
+})
+
 export const metadata: Metadata = {
   title: "Sunset Banking",
   description: "Sunset is a modern banking platform.",
@@ -33,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexSerif.variable} ${vt323.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${inter.variable} ${ibmPlexSerif.variable} ${vt323.variable} ${mcfont.variable}`}>
+      <body>{children}</body> 
     </html>
   );
 }
