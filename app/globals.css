@@ -45,13 +45,19 @@
   --color-success-700: #027A48;
   --color-success-900: #054F31;
   
+  /* Not sure if these text variables work like the ones below */
   --text-10: 10px;
   --text-10-line-height: 14px;
+  --text-16: 16px;
+  --text-16-line-height: 20px; 
+  --text-24: 24px;
+  --text-24-line-height: 30px; 
 
   /* --- BACKGROUND IMAGES & GRADIENTS --- */
-  --background-image-bank-gradient: linear-gradient(90deg, #FD7E05 0%, #FF9E42 100%);
-  --background-image-gradient-mesh: url('/icons/gradient-mesh.svg');
-  --background-image-bank-green-gradient: linear-gradient(90deg, #01797A 0%, #489399 100%);
+  --bg-bank-orange-gradient: linear-gradient(90deg, #FD7E05 0%, #FF9E42 100%);
+  --bg-bank-purple-gradient: linear-gradient(90deg, #94125A 0%, #8B276F 100%);
+  --bg-gradient-mesh: url('/icons/gradient-mesh.svg');
+  --bg-bank-green-gradient: linear-gradient(90deg, #01797A 0%, #489399 100%);
 
   /* --- BOX SHADOWS --- */
   --shadow-form: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
@@ -384,7 +390,7 @@
 .right-sidebar {
   display: none !important;
 }
-@media (min-width: 1280px) {
+@media (min-width: 1300px) { /* Change back to 1280px when done testing */
   .right-sidebar {
     display: flex !important;
     width: 355px !important;
@@ -405,7 +411,7 @@
 .profile-banner {
   height: 120px;
   width: 100%;
-  background-image: var(--gradient-mesh);
+  background-image: var(--bg-gradient-mesh);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -588,7 +594,7 @@
   border-radius: 20px;
   border-width: 1px;
   border-color: #ffffff;
-  background-image: var(--bank-gradient);
+  background-image: var(--bg-bank-purple-gradient);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   backdrop-filter: blur(6px);
 }
@@ -605,7 +611,7 @@
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   background-color: #344054;
-  background-image: var(--bank-gradient);
+  background-image: var(--bg-bank-purple-gradient);
   padding: 1.25rem 1.25rem 1rem;
 }
 
@@ -619,11 +625,12 @@
   justify-content: space-between;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  background-image: var(--bank-gradient);
+  background-image: var(--bg-bank-purple-gradient);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
   padding-right: 1.25rem;
 }
 
@@ -679,66 +686,22 @@
   flex-direction: column;
   justify-content: space-between;
   overflow-y: auto;
+  padding-top: 4rem;
+  padding-left: 1rem;
 }
 
 .mobilenav-sheet_close {
   display: flex;
-  width: 100%;
+  width: 90%;
   max-width: 15rem;
   align-items: center;
   gap: 0.75rem;
   border-radius: 0.5rem;
-  justify-content: center;
   padding: 1rem;
 }
 .mobilenav-sheet_close.bg-bank-gradient {
   background-image: linear-gradient(90deg, #FD7E05 0%, #FF9E42 100%);
-  color: #ffffff;
 }
-@media (min-width: 768px) {
-  .mobilenav-sheet_close {
-    padding: 0.75rem !important;
-  }
-}
-@media (min-width: 1280px) {
-  .mobilenav-sheet_close {
-    justify-content: center;
-  }
-}
-@media (min-width: 1536px) {
-  .mobilenav-sheet_close {
-    padding: 1rem !important;
-  }
-}
-
-/* 
-.sidebar-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-  justify-content: center;
-}
-.sidebar-link.bg-bank-gradient {
-  background-image: linear-gradient(90deg, #FD7E05 0%, #FF9E42 100%);
-  color: #ffffff;
-}
-@media (min-width: 768px) {
-  .sidebar-link {
-    padding: 0.75rem !important;
-  }
-}
-@media (min-width: 1280px) {
-  .sidebar-link {
-    justify-content: flex-start;
-  }
-}
-@media (min-width: 1536px) {
-  .sidebar-link {
-    padding: 1rem !important;
-  }
-} */
 
 /* PlaidLink */
 .plaidlink-primary {
