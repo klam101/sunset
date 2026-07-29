@@ -12,22 +12,50 @@ import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, } from "@/
 import { Input } from "@/components/ui/input"
 import CustomInput from './CustomInput'
 import { authFormSchema } from '@/lib/utils'
+import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const AuthForm = ({ type }: { type: string }) => {
+  const router = useRouter();
   const [user, setUser] = useState(null)
+  const [isLoading, setLoading] = useState(false)
 
-  const form = useForm<z.infer<typeof authFormSchema>>({
-    resolver: zodResolver(authFormSchema),
+  const formSchema = authFormSchema(type);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   })
 
-  function onSubmit(values: z.infer<typeof authFormSchema>) {
-    console.log(values)
+  const onSubmit = async(data: z.infer<typeof formSchema>) => {
+      setLoading(true)
+
+    try {
+      //Sign up with Appwrite & create plaid token
+
+      if (type === "sign-up") { 
+        // const newUser = await signUp(data);
+
+        // setUser(newUser)
+      } else if (type === "sign-in") {
+        // const response = await signIn({
+        //   email: data.email,
+        //   password: data.password
+        // })
+        // if (response) router.push("/")
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
+  // Need to check validation error messages. Some of them don't make sense like postal code can't be letters.
+  // Relavent files could be utils.ts with authFormSchema and CustomInput.tsx with the Controller component.
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
@@ -48,29 +76,55 @@ const AuthForm = ({ type }: { type: string }) => {
         <div className="flex flex-col gap-4">
           {/* PlaidLink */}
         </div>
-      ): (
+      ) : (
         <Card className="!px-2 w-full sm:max-w-md border-0 ring-0 shadow-none">
           <CardContent>
             <form id="auth-form" onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-6">
               <FieldGroup className="gap-4">
                 {type === "sign-up" && (
-                  <CustomInput control={form.control} name="email" label="Email" placeholder="Enter your email" />
+                  <>
+                    <div className="flex gap-4">
+                      <CustomInput control={form.control} name="firstName" label="First Name" placeholder="Enter your first name" />
+                      <CustomInput control={form.control} name="lastName" label="Last Name" placeholder="Enter your last name" />
+                    </div>
+                    <CustomInput control={form.control} name="address1" label="Address" placeholder="Enter your specific address" />
+                    <CustomInput control={form.control} name="city" label="City" placeholder="Enter your city" />
+                    <div className="flex gap-4">
+                      <CustomInput control={form.control} name="state" label="State" placeholder="ex: NY" />
+                      <CustomInput control={form.control} name="postalCode" label="Postal Code" placeholder="ex: 10001" />
+                    </div>
+                    <div className="flex gap-4">
+                      <CustomInput control={form.control} name="dateOfBirth" label="Date of Birth" placeholder="MM/DD/YYYY" />
+                      <CustomInput control={form.control} name="ssn" label="SSN" placeholder="ex: 123-45-6789" />
+                    </div>
+                  </>
                 )}
-
                 <CustomInput control={form.control} name="email" label="Email" placeholder="Enter your email" />
                 <CustomInput control={form.control} name="password" label="Password" placeholder="Enter your password" />
-
-                {type === "sign-up" && (
-                  <CustomInput control={form.control} name="email" label="Email" placeholder="Enter your email" />
-                )}
               </FieldGroup>
             </form>
           </CardContent>
           <CardFooter className="border-0 pt-0">
-            <Field orientation="horizontal">
-              <Button type="submit" className="form-btn" form="auth-form" onSubmit={form.handleSubmit(onSubmit)} >
-                Submit
+            <Field>
+              <Button type="submit" disabled={isLoading} className="form-btn" form="auth-form" >
+                {isLoading ? (
+                  <>
+                    <Loader2 size={20} className="mr-2 h-4 w-4 animate-spin" /> &nbsp; Loading...
+                  </>
+                ) : type === "sign-in" ? "Sign In" : "Sign Up" }
               </Button>
+              <p className="flex justify-center text-14 font-normal text-gray-600">
+                {type === "sign-in" ? (
+                  <span>Dont have an account?&nbsp;
+                    <Link href="/sign-up" className="text-blue-500">
+                      Sign Up
+                    </Link>
+                  </span>
+                ) : (
+                  <span>Already have an account?&nbsp;
+                    <Link href="/sign-in" className="text-blue-500">Sign In</Link></span>
+                )}
+              </p>
             </Field>
           </CardFooter>
         </Card>
