@@ -131,10 +131,10 @@
 .input-class {
   font-size: 16px;
   line-height: 24px;
-  --tw-placeholder-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-placeholder-opacity));
-  border-radius: 0.5rem;
+  padding-left: 0.5rem;
+  border-radius: 0.4rem;
   border-width: 1px;
+  --tw-placeholder-opacity: 1;
   border-color: #d1d5db;
   color: #111827;
 }
@@ -390,7 +390,7 @@
 .right-sidebar {
   display: none !important;
 }
-@media (min-width: 1300px) { /* Change back to 1280px when done testing */
+@media (min-width: 1280px) {
   .right-sidebar {
     display: flex !important;
     width: 355px !important;
@@ -709,8 +709,8 @@
   line-height: 24px;
   border-radius: 0.5rem;
   border-width: 1px;
-  border-color: var(--bankGradient);
-  background-image: var(--bank-gradient);
+  border-color: var(--bg-bank-orange-gradient);
+  background-image: var(--bg-bank-orange-gradient);
   font-weight: 600;
   color: #ffffff;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -795,6 +795,7 @@
 }
 
 .form-message {
+  margin-left: 0.25rem;
   font-size: 12px;
   line-height: 16px;
   color: #ef4444;
@@ -805,11 +806,14 @@
   line-height: 24px;
   border-radius: 0.5rem;
   border-width: 1px;
-  border-color: var(--bankGradient);
-  background-image: var(--bank-gradient);
+  border-color: var(--bg-bank-orange-gradient);
+  background-image: var(--bg-bank-orange-gradient);
   font-weight: 600;
   color: #ffffff;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  height: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .form-link {
@@ -817,7 +821,7 @@
   line-height: 20px;
   cursor: pointer;
   font-weight: 500;
-  color: var(--bankGradient);
+  color: var(--bg-bank-orange-gradient);
 }
 
 /* Payment Transfer */
@@ -896,7 +900,7 @@
   font-size: 14px;
   line-height: 20px;
   width: 100%;
-  background-image: var(--bank-gradient);
+  background-image: var(--bg-bank-orange-gradient);
   font-weight: 600;
   color: #ffffff;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
