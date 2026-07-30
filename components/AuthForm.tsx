@@ -5,15 +5,19 @@ import Image from 'next/image'
 import * as z from "zod"
 import { useState } from 'react'
 import { Controller, useForm } from "react-hook-form"
+import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import CustomInput from './CustomInput'
 import { authFormSchema } from '@/lib/utils'
-import { Loader2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { signIn, signUp } from '@/lib/actions/user.actions';
+
+import CustomInput from './CustomInput'
+import DateInput from "./DateInput"
 
 const AuthForm = ({ type }: { type: string }) => {
   const router = useRouter();
@@ -31,21 +35,34 @@ const AuthForm = ({ type }: { type: string }) => {
   })
 
   const onSubmit = async(data: z.infer<typeof formSchema>) => {
-      setLoading(true)
+    setLoading(true)
+    const payload = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      address1: data.address1,
+      city: data.city,
+      state: data.state,
+      postalCode: data.postalCode,
+      dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth).toISOString().split("T")[0] : undefined,
+      ssn: data.ssn,
+      email: data.email,
+      password: data.password
+    };
 
     try {
       //Sign up with Appwrite & create plaid token
 
       if (type === "sign-up") { 
-        // const newUser = await signUp(data);
+        const newUser = await signUp(data);
 
-        // setUser(newUser)
+        setUser(newUser)  
       } else if (type === "sign-in") {
-        // const response = await signIn({
-        //   email: data.email,
-        //   password: data.password
-        // })
-        // if (response) router.push("/")
+        const response = await signIn({
+          email: data.email,
+          password: data.password
+        })
+        
+        if (response) router.push("/")
       }
     } catch (error) {
       console.error(error)
@@ -59,10 +76,10 @@ const AuthForm = ({ type }: { type: string }) => {
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
-        <Link href="/" className="cursor-pointer flex items-center gap-1">
+        <div className="cursor-default flex items-center gap-1">
           <Image src="/icons/logo.svg" width={34} height={34} alt="Sunset Logo" className="size-[3rem]" />
           <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">Sunset</h1>
-        </Link>
+        </div>
         <div className="flex flex-col gap-1 md:gap-3">
           <h1 className="text-24  lg:text-36 font-semibold text-gray-900">
             {user ? "Link account" : type === "sign-in" ? "Sign In" : "Sign Up"}
@@ -94,7 +111,7 @@ const AuthForm = ({ type }: { type: string }) => {
                       <CustomInput control={form.control} name="postalCode" label="Postal Code" placeholder="ex: 10001" />
                     </div>
                     <div className="flex gap-4">
-                      <CustomInput control={form.control} name="dateOfBirth" label="Date of Birth" placeholder="MM/DD/YYYY" />
+                      <DateInput control={form.control} name="dateOfBirth" label="Date of Birth" placeholder="MM/DD/YYYY" />
                       <CustomInput control={form.control} name="ssn" label="SSN" placeholder="ex: 123-45-6789" />
                     </div>
                   </>

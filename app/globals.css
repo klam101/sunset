@@ -754,7 +754,7 @@
   width: 100%;
   align-items: center;
   justify-content: flex-end;
-  background-color: #f3f9ff;
+  background-color: #fff5f3;
 }
 @media (max-width: 1024px) {
   .auth-asset {
