@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Controller, useForm } from "react-hook-form"
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { parse, format, isValid } from "date-fns"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
@@ -18,6 +19,7 @@ import { signIn, signUp } from '@/lib/actions/user.actions';
 
 import CustomInput from './CustomInput'
 import DateInput from "./DateInput"
+import PlaidLink from './PlaidLink';
 
 const AuthForm = ({ type }: { type: string }) => {
   const router = useRouter();
@@ -36,24 +38,33 @@ const AuthForm = ({ type }: { type: string }) => {
 
   const onSubmit = async(data: z.infer<typeof formSchema>) => {
     setLoading(true)
-    const payload = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      address1: data.address1,
-      city: data.city,
-      state: data.state,
-      postalCode: data.postalCode,
-      dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth).toISOString().split("T")[0] : undefined,
-      ssn: data.ssn,
-      email: data.email,
-      password: data.password
-    };
 
     try {
       //Sign up with Appwrite & create plaid token
+      if (type === "sign-up") {
+        if (!data.dateOfBirth) {
+          throw new Error("Date of birth is required")
+        }
 
-      if (type === "sign-up") { 
-        const newUser = await signUp(data);
+        const parsedDob = parse(data.dateOfBirth, "MM/dd/yyyy", new Date())
+        if (!isValid(parsedDob)) {
+          throw new Error("Invalid date of birth")
+        }
+        
+        const userData = {
+        firstName: data.firstName!,
+        lastName: data.lastName!,
+        address1: data.address1!,
+        city: data.city!,
+        state: data.state!,
+        postalCode: data.postalCode!,
+        dateOfBirth: format(parsedDob, "yyyy-MM-dd"),
+        ssn: data.ssn!,
+        email: data.email,
+        password: data.password
+      }
+
+        const newUser = await signUp(userData);
 
         setUser(newUser)  
       } else if (type === "sign-in") {
@@ -91,9 +102,9 @@ const AuthForm = ({ type }: { type: string }) => {
       </header>
       {user ? (
         <div className="flex flex-col gap-4">
-          {/* PlaidLink */}
+          <PlaidLink user={user} variant="primary" />
         </div>
-      ) : (
+      ) : ( 
         <Card className="!px-2 w-full sm:max-w-md border-0 ring-0 shadow-none">
           <CardContent>
             <form id="auth-form" onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-6">
