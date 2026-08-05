@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, } from "@/components/ui/field"
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldSeparator, } from "@/components/ui/field"
 import { getBank, getBankByAccountId } from "@/lib/actions/user.actions";
 import { createTransaction } from "@/lib/actions/transactions.actions";
 import { createTransfer } from "@/lib/actions/dwolla.actions";
@@ -90,20 +90,27 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
   };
 
   return (
-    <Card className="!px-1 w-full ring-0 shadow-none">
+    <Card className="!px-1 w-full ring-0 shadow-none color-[#F9FAFB]">
       <CardContent>
         <form id="payment-transfer-form" onSubmit={form.handleSubmit(onSubmit)} noValidate className="flex flex-col">
+          
+          <div className="payment-transfer_form-details">
+            <h2 className="text-18 font-semibold text-gray-900">Transfer details</h2>
+            <p className="text-16 font-normal text-gray-600">Enter the details of therecipient</p>
+          </div>
+          <FieldSeparator />
           <FieldGroup className="gap-4">
-            <SelectBankInput control={form.control} accounts={accounts} label="Select Source Bank" description="Select the bank account you want to transfer funds from"/>
+            <SelectBankInput control={form.control} accounts={accounts} label="Select Source Bank" description="Select the bank account you want to transfer funds from" layout="stacked" />
             <CustomTextarea control={form.control} name="name" label="Transfer Note (Optional)" description="Please provide any additional information or instructions related to the transfer" placeholder="Write a short note here" />
           </FieldGroup>
 
           <div className="payment-transfer_form-details">
             <h2 className="text-18 font-semibold text-gray-900">Bank account details</h2>
-            <p className="text-16 font-normal text-gray-600"> Enter the bank account details of the recipient</p>
+            <p className="text-16 font-normal text-gray-600">Enter the bank account details of the recipient</p>
           </div>
+          <FieldSeparator />
           <FieldGroup className="gap-4">
-            <CustomInput control={form.control} name="email" type="email" label="Recipient&apos;s Email Address" placeholder="ex: johndoe@gmail.com" />
+            <CustomInput control={form.control} name="email" type="email" label="Recipient&apos;s Email Address" placeholder="ex: johndoe@gmail.com"  />
             <CustomInput control={form.control} name="shareableId" label="Receiver&apos;s Plaid Sharable Id" placeholder="Enter the public account number" />
             <CustomInput control={form.control} name="amount" type="number" label="Amount" placeholder="ex: 5.00" />
           </FieldGroup>

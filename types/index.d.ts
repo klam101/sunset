@@ -112,6 +112,8 @@ declare type Receiver = {
   lastName: string;
 };
 
+declare type Layout = "stacked" | "split";
+
 declare type TransferParams = {
   sourceFundingSourceUrl: string;
   destinationFundingSourceUrl: string;
@@ -143,22 +145,25 @@ declare type CustomInputProps<TFieldValues extends FieldValues> = {
   name: FieldPath<TFieldValues>;
   label: string;
   description?: string;
-  placeholder: string;
+  placeholder?: string;
+  layout?: Layout;
 };
 
 declare type CustomTextareaProps<TFieldValues extends FieldValues> = {
   control: Control<TFieldValues>;
   name: FieldPath<TFieldValues>;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   description?: string;
+  layout?: Layout;
 };
 
 declare type SelectBankInputProps = {
   control: Control<any>;
   accounts: Account[];
-  label?: string;
+  label: string;
   description?: string;
+  layout?: Layout;
 };
 
 declare type BankDropdownProps = {
