@@ -105,7 +105,7 @@ const AuthForm = ({ type }: { type: string }) => {
           <PlaidLink user={user} variant="primary" />
         </div>
       ) : ( 
-        <Card className="!px-2 w-full sm:max-w-md border-0 ring-0 shadow-none">
+        <Card className="!px-2 w-full sm:max-w-md ring-0 shadow-none">
           <CardContent>
             <form id="auth-form" onSubmit={form.handleSubmit(onSubmit)} noValidate className="space-y-6">
               <FieldGroup className="gap-4">
@@ -123,12 +123,12 @@ const AuthForm = ({ type }: { type: string }) => {
                     </div>
                     <div className="flex gap-4">
                       <DateInput control={form.control} name="dateOfBirth" label="Date of Birth" placeholder="MM/DD/YYYY" />
-                      <CustomInput control={form.control} name="ssn" label="SSN" placeholder="ex: 123-45-6789" />
+                      <CustomInput control={form.control} name="ssn" label="SSN" placeholder="ex: 123-45-6789" type="number" />
                     </div>
                   </>
                 )}
-                <CustomInput control={form.control} name="email" label="Email" placeholder="Enter your email" />
-                <CustomInput control={form.control} name="password" label="Password" placeholder="Enter your password" />
+                <CustomInput control={form.control} name="email" label="Email" placeholder="Enter your email" type="email" />
+                <CustomInput control={form.control} name="password" label="Password" placeholder="Enter your password" type="password" />
               </FieldGroup>
             </form>
           </CardContent>

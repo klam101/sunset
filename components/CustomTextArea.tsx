@@ -1,25 +1,23 @@
 import { Controller, type Control, type FieldPath, type FieldValues } from "react-hook-form";
 import { Field, FieldDescription, FieldError, FieldLabel } from "./ui/field";
-import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
-const CustomInput = <TFieldValues extends FieldValues>({
+const CustomTextarea = <TFieldValues extends FieldValues>({
   control,
-  type = "text",
   name,
   label,
-  description,
   placeholder,
-}: CustomInputProps<TFieldValues>) => {
+  description,
+}: CustomTextareaProps<TFieldValues>) => {
   return (
     <Controller name={name} control={control} render={({ field, fieldState }) => (
       <Field data-invalid={fieldState.invalid}>
         <FieldLabel htmlFor={name} className="form-label">{label}</FieldLabel>
         {description && ( <FieldDescription className="form-description">{description}</FieldDescription> )}
-        <Input
+        <Textarea
           id={name}
-          type={type}
           placeholder={placeholder}
-          className="input-class"
+          className="input-class min-h-[120px]"
           aria-invalid={fieldState.invalid}
           {...field}
         />
@@ -29,4 +27,4 @@ const CustomInput = <TFieldValues extends FieldValues>({
   );
 };
 
-export default CustomInput;
+export default CustomTextarea;

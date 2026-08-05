@@ -137,6 +137,37 @@ declare type NewDwollaCustomerParams = {
   ssn: string;
 };
 
+declare type CustomInputProps<TFieldValues extends FieldValues> = {
+  control: Control<TFieldValues>;
+  type?: "text" | "password" | "email" | "number";
+  name: FieldPath<TFieldValues>;
+  label: string;
+  description?: string;
+  placeholder: string;
+};
+
+declare type CustomTextareaProps<TFieldValues extends FieldValues> = {
+  control: Control<TFieldValues>;
+  name: FieldPath<TFieldValues>;
+  label: string;
+  placeholder: string;
+  description?: string;
+};
+
+declare type SelectBankInputProps = {
+  control: Control<any>;
+  accounts: Account[];
+  label?: string;
+  description?: string;
+};
+
+declare type BankDropdownProps = {
+  accounts: Account[];
+  value?: string;
+  onChange: (value: string) => void;
+  otherStyles?: string;
+};
+
 declare interface CreditCardProps {
   account: Account;
   userName: string;
@@ -190,12 +221,6 @@ declare interface PlaidLinkProps {
 
 declare interface AuthFormProps {
   type: "sign-in" | "sign-up";
-}
-
-declare interface BankDropdownProps {
-  accounts: Account[];
-  setValue?: UseFormSetValue<any>;
-  otherStyles?: string;
 }
 
 declare interface BankTabItemProps {
