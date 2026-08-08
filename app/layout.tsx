@@ -1,3 +1,5 @@
+export const dyanmic = "force-dynamic";
+
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif, VT323 } from "next/font/google";
 import localFont from "next/font/local";
