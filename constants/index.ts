@@ -51,7 +51,7 @@ export const ITEMS = [
 
 export const topCategoryStyles = {
   "Food and Drink": {
-    bg: "bg-blue-25",
+    bg: "bg-blue-50",
     circleBg: "bg-blue-100",
     text: {
       main: "text-blue-900",
