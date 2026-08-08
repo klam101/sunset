@@ -1,4 +1,4 @@
-export const dyanmic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif, VT323 } from "next/font/google";
