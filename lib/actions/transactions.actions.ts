@@ -26,7 +26,7 @@ export const createTransaction = async (transaction: CreateTransactionProps) => 
 
     return parseStringify(newTransaction);
   } catch (error) {
-    console.log(error);
+    console.error("Creating a transaction failed: ", error);
   }
 }
 
@@ -56,6 +56,6 @@ export const getTransactionsByBankId = async ({bankId}: getTransactionsByBankIdP
 
     return parseStringify(transactions);
   } catch (error) {
-    console.log(error);
+    console.error("Fetching transactions by bank ID failed: ", error);
   }
 }

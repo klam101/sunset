@@ -10,7 +10,7 @@ const SelectBankInput = ({ control, accounts, label = "Missing Label", descripti
       <Field data-invalid={fieldState.invalid} className={cn( "flex w-full", isSplit ? "flex-row md:flex-row md:items-start md:justify-between" : "flex-col" )}>
         <FieldLabel className="form-label">{label}</FieldLabel>
         <FieldDescription className="form-description">{description}</FieldDescription>
-        <BankDropdown accounts={accounts} value={field.value} onChange={field.onChange} otherStyles="!w-full" />
+        <BankDropdown accounts={accounts} value={field.value} onChange={field.onChange} otherStyles="font-mc" />
         {fieldState.error && ( <FieldError errors={[fieldState.error]} className="text-12 text-red-500" /> )}
       </Field>
     )}/>

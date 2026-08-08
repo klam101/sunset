@@ -28,18 +28,16 @@ export const BankDropdown = ({ accounts = [], value, onChange, otherStyles, }: B
 
   return (
     <Select defaultValue={selected.id} onValueChange={(value) => handleBankChange(value)} >
-      <SelectTrigger className={`flex w-full p-4! gap-3 md:w-75 ${otherStyles}`} >
+      <SelectTrigger className={`flex p-4! gap-3 ${otherStyles}`} >
         <CreditCardIcon />
         <p className="line-clamp-1 w-full text-left">{selected.name}</p>
       </SelectTrigger>
-      <SelectContent className={`w-full md:w-75 bg-white ${otherStyles}`} align="end" >
-        <SelectGroup>
-          <SelectLabel className="text-xs text-muted-foreground">Select a bank to display</SelectLabel>
+      <SelectContent className={`${otherStyles}`} alignItemWithTrigger >
+        <SelectGroup className="p-1!" >
           {accounts.map((account: Account) => (
             <SelectItem key={account.id} value={account.appwriteItemId} >
-              <div className="flex flex-col ">
-                <p className="text-16 font-medium">{account.name}</p>
-                <p className="text-14 font-medium text-blue-600">{formatAmount(account.currentBalance)}</p>
+              <div className="flex items-center gap-1 whitespace-nowrap">
+                <span>{account.name}:</span> <span className="text-amber-600">{formatAmount(account.currentBalance)}</span>
               </div>
             </SelectItem>
           ))}

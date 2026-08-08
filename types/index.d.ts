@@ -181,7 +181,7 @@ declare interface CreditCardProps {
 
 declare interface BankInfoProps {
   account: Account;
-  appwriteItemId?: string;
+  appwriteItemId?: string; // Removed from BankTabItem
   type: "full" | "card";
 }
 
@@ -205,7 +205,7 @@ declare interface PageHeaderProps {
 }
 
 declare interface PaginationProps {
-  page: number;
+  page: number; // Removed from RecentTransactions
   totalPages: number;
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { Client } from "dwolla-v2";
@@ -86,8 +87,13 @@ export const createTransfer = async ({
     return await dwollaClient
       .post("transfers", requestBody)
       .then((res) => res.headers.get("location"));
-  } catch (err) {
-    console.error("Transfer fund failed: ", err);
+  } catch (err: any) {
+    console.error("Transfer fund failed:", {
+      message: err?.message,
+      status: err?.status,
+      body: err?.body,
+      response: err?.response?.body,
+    });
   }
 };
 
