@@ -27,7 +27,7 @@ export const BankDropdown = ({ accounts = [], value, onChange, otherStyles, }: B
   };
 
   return (
-    <Select defaultValue={selected.id} onValueChange={(value) => handleBankChange(value)} >
+    <Select defaultValue={selected.id} onValueChange={(value) => value && handleBankChange(value)} >
       <SelectTrigger className={`flex p-4! gap-3 ${otherStyles}`} >
         <CreditCardIcon />
         <p className="line-clamp-1 w-full text-left">{selected.name}</p>
