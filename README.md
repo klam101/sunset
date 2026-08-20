@@ -6,6 +6,8 @@
 
 Built with Next.js, TypeScript, Tailwind CSS, and shadcn/ui — integrating [Plaid](https://plaid.com/) for bank connectivity and [Dwolla](https://www.dwolla.com/) for ACH money transfers.
 
+### 🔗 [Live Demo](https://sunset-rk1r.vercel.app)
+
 ![Sunset dashboard preview](public/images/demo.png)
 
 </div>
